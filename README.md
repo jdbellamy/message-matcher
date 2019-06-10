@@ -111,7 +111,7 @@ func loadConfig() MatcherGroup {
 	viper.AddConfigPath(".")
 	_ = viper.ReadInConfig()
 	cfg := MatcherGroupConfig{}
-	matcherDefs := viper.Get("matchers")
+	defs := viper.Get("matchers")
 	_ = mapstructure.Decode(defs, &cfg)
 	return NewMatcherGroup().FromConfig(cfg)
 }
