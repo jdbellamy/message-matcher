@@ -1,0 +1,14 @@
+.DS_Store
+
+vendor/
+
+LOCAL.md
+
+main.go*
+.matcher.yml
+messages.json
+
+mocks/
+
+Makefile
+.env
