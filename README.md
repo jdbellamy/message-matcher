@@ -5,7 +5,7 @@ A go library for defining and applying pattern matching rules against arbitrary 
 ## todos
 - [x] apply regex checks to matching logic
 - [ ] messaging format codecs
-- [ ] rethink MatchAll (maybe MatchAny?)
+- [x] rethink MatchAll (maybe MatchAny?)
 - [ ] consider a more meaningful return type for Message.Value()
 
 ## example usage
@@ -87,7 +87,7 @@ func main() {
 	matchers := loadConfig()
 	messages := loadMessages()
 	for i, msg := range messages {
-		matched := matchers.MatchAll(msg)
+		matched := matchers.MatchAny(msg)
 		log.Printf("[%d: %t]", i, matched)
 	}
 }

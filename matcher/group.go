@@ -5,7 +5,7 @@ package matcher
 type MatcherGroup interface {
 	AddMatcher(MessageMatcher) MatcherGroup
 	Matchers() []MessageMatcher
-	MatchAll(Message) bool
+	MatchAny(Message) bool
 	FromConfig(MatcherGroupConfig) MatcherGroup
 }
 
@@ -47,7 +47,7 @@ func (g matcherGroup) Matchers() []MessageMatcher {
 	return safe
 }
 
-func (g matcherGroup) MatchAll(msg Message) bool {
+func (g matcherGroup) MatchAny(msg Message) bool {
 	for _, m := range g.Matchers() {
 		if m.Match(msg) {
 			return true

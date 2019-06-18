@@ -4,12 +4,11 @@ import (
 	"testing"
 
 	"gitlab.com/jdbellamy/message-matcher/matcher"
-	"gitlab.com/jdbellamy/message-matcher/matcher/mocks"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMessageGroupMatchAll(t *testing.T) {  
+func TestMessageGroupMatchAny(t *testing.T) {  
 	cfg := matcher.MatcherGroupConfig{{
 		"type": "WARN",
 		"details.depth2.depth3.foo3": "bar3",
@@ -34,12 +33,12 @@ func TestMessageGroupMatchAll(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	actual := mg.MatchAll(msg)
+	actual := mg.MatchAny(msg)
 
 	assert.Equal(t, true, actual)  
 }
 
-func TestMessageGroupMatchAllIsFalse(t *testing.T) {  
+func TestMessageGroupMatchAnyIsFalse(t *testing.T) {  
 	cfg := matcher.MatcherGroupConfig{{
 		"type": "WARN",
 		"details.foo1": "bar1",
@@ -56,12 +55,12 @@ func TestMessageGroupMatchAllIsFalse(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	actual := mg.MatchAll(msg)
+	actual := mg.MatchAny(msg)
 
 	assert.Equal(t, false, actual)
 }
 
-func TestMessageGroupMatchAllRegExp(t *testing.T) {  
+func TestMessageGroupMatchAnyRegExp(t *testing.T) {  
 	cfg := matcher.MatcherGroupConfig{{
 		"type": "WARN",
   		"details.depth2.depth3.foo3": "\\bbar[0-9]\\b",
@@ -86,7 +85,7 @@ func TestMessageGroupMatchAllRegExp(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	actual := mg.MatchAll(msg)
+	actual := mg.MatchAny(msg)
 
 	assert.Equal(t, true, actual)  
 }
