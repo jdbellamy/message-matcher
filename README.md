@@ -3,7 +3,7 @@
 A go library for defining and applying pattern matching rules against arbitrary JSON messages. Intended for situations where the message structure can be dissimilar between instances or the distinguishing elements of the message may be deeply nested.           
 
 ## todos
-- [ ] apply regex checks to matching logic
+- [x] apply regex checks to matching logic
 - [ ] messaging format codecs
 - [ ] rethink MatchAll (maybe MatchAny?)
 - [ ] consider a more meaningful return type for Message.Value()
@@ -129,3 +129,18 @@ The output should resemble the following:
 2019/06/08 04:07:34 [1: true]
 2019/06/08 04:07:34 [2: true]
 ```
+
+## path syntax
+This project uses [gjson](https://github.com/tidwall/gjson) for searching JSON elements.  The syntax for which can be found [here](https://github.com/tidwall/gjson#path-syntax).
+
+## regular expression matching
+PCRE style regular expressions can be used to match element values.
+
+#### example regex usage:
+```go
+cfg := matcher.MatcherGroupConfig{{
+    "type": "WARN",
+    "details.depth2.depth3.foo3": "\\bbar[0-9]\\b",
+}}
+```
+_NOTE: All forward slashes must be escaped._

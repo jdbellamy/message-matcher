@@ -3,6 +3,8 @@ package matcher
 //go:generate mockery -name=MessageMatcher
 
 import (
+	"regexp"
+
 	"github.com/tidwall/gjson"
 )
 
@@ -36,8 +38,8 @@ func (m matcher) Rules() []MatcherRule {
 func (m *matcher) Match(msg Message) bool {
 	for _, rule := range m.rules {
 		var result = gjson.Get(msg.Value(), rule.KeyPath)
-		// TODO - apply regexp on values
-		if result.String() != rule.RegExp {
+		r, _ := regexp.Compile(rule.RegExp)
+		if !r.MatchString(result.String()) {
 			return false
 		}
 		rule.Matched = true
