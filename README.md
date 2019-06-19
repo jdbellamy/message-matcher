@@ -143,4 +143,4 @@ cfg := matcher.MatcherGroupConfig{{
     "details.depth2.depth3.foo3": "\\bbar[0-9]\\b",
 }}
 ```
-_NOTE: All forward slashes must be escaped._
+_NOTE: Back slashes must be escaped._
